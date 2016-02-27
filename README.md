@@ -15,7 +15,7 @@ Please see the **Compiling.md** file
 
 #### Supported Remote Server Types
 - For PC/Mac Servers: `Bukkit`/`Spigot`/`Glowstone`/`SpongeVanilla`/`BungeeCord`
-- For Pocket Edition Servers: `PocketMine-MP (and all forks)`, `Nukkit`
+- For Pocket Edition Servers: `MiNet`, `Nukkit`, `PocketMine-MP (and all forks)`
 - Not listed is **NOT** mean unsupported, just **untested**.
 
 ## Usage
