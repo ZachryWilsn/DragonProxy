@@ -173,7 +173,7 @@ public class UpstreamSession {
 
         this.username = packet.username;
         proxy.getLogger().info(proxy.getLang().get(Lang.MESSAGE_CLIENT_CONNECTED, username, remoteAddress));
-        if (proxy.equals("online")) {
+        if (proxy.getAuthMode().equals("online")) {
             StartGamePacket pkStartGame = new StartGamePacket();
             pkStartGame.eid = 0; //Use EID 0 for eaisier management
             pkStartGame.dimension = (byte) 0;
