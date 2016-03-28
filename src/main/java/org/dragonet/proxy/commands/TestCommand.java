@@ -20,6 +20,10 @@ import org.dragonet.net.packet.minecraft.ChangeDimensionPacket;
 import org.dragonet.proxy.DragonProxy;
 import org.dragonet.proxy.network.UpstreamSession;
 
+/*
+ * Used for testing during development.
+ * You do not need to use this command.
+ */
 public class TestCommand implements ConsoleCommand {
 
     @Override

@@ -10,10 +10,10 @@
  *
  * @author The Dragonet Team
  */
-package org.dragonet.entity.metadata.type;
+package org.dragonet.proxy.entity.meta.type;
 
-import org.dragonet.entity.metadata.EntityMetaData;
-import org.dragonet.entity.metadata.EntityMetaDataObject;
+import org.dragonet.proxy.entity.meta.EntityMetaData;
+import org.dragonet.proxy.entity.meta.EntityMetaDataObject;
 
 public class ByteMeta implements EntityMetaDataObject {
 

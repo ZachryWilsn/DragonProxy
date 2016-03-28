@@ -10,31 +10,31 @@
  *
  * @author The Dragonet Team
  */
-package org.dragonet.entity.metadata.type;
+package org.dragonet.proxy.entity.meta.type;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import org.dragonet.entity.metadata.EntityMetaData;
-import org.dragonet.entity.metadata.EntityMetaDataObject;
+import org.dragonet.proxy.entity.meta.EntityMetaData;
+import org.dragonet.proxy.entity.meta.EntityMetaDataObject;
 
-public class ShortMeta implements EntityMetaDataObject {
+public class FloatMeta implements EntityMetaDataObject {
 
-    public short data;
+    public float data;
 
-    public ShortMeta(short data) {
+    public FloatMeta(float data) {
         this.data = data;
     }
 
     @Override
     public int type() {
-        return EntityMetaData.Constants.DATA_TYPE_SHORT;
+        return EntityMetaData.Constants.DATA_TYPE_FLOAT;
     }
 
     @Override
     public byte[] encode() {
-        ByteBuffer buff = ByteBuffer.allocate(2);
+        ByteBuffer buff = ByteBuffer.allocate(4);
         buff.order(ByteOrder.LITTLE_ENDIAN);
-        buff.putShort(this.data);
+        buff.putFloat(this.data);
         return buff.array();
     }
 

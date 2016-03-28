@@ -10,7 +10,7 @@
  *
  * @author The Dragonet Team
  */
-package org.dragonet.entity.metadata;
+package org.dragonet.proxy.entity.meta;
 
 public interface EntityMetaDataObject {
 

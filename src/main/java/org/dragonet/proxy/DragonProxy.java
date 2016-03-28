@@ -34,7 +34,7 @@ public class DragonProxy {
     public static void main(String[] args) {
         new DragonProxy().run(args);
     }
-    public final static boolean IS_RELEASE = false; //DO NOT CHANGE, ONLY ON A RELEASE
+    public final static boolean IS_RELEASE = false; //DO NOT CHANGE, ONLY ON PRODUCTION
 
     private final Logger logger = Logger.getLogger("DragonProxy");
 
@@ -78,24 +78,27 @@ public class DragonProxy {
         try {
             config = new Yaml().loadAs(new FileInputStream("config.yml"), ServerConfig.class);
         } catch (IOException ex) {
-            logger.severe("Failed to load configuration file!");
+            logger.severe("Failed to load configuration file! Make sure the file is writable.");
             ex.printStackTrace();
             return;
         }
-
+		
         //Initialize console
         console = new ConsoleManager(this);
         console.startConsole();
 
+		//Check for startup arguments
         checkArguments(args);
 
+		//Should we save console log? Set it config file
         if(config.isLog_console()){
             console.startFile("console.log");
             logger.info("Saving console output enabled"); //TODO: Translations
         } else {
             logger.info("Saving console output disabled");
         }
-
+		
+		//Load language file
         try {
             lang = new Lang(config.getLang());
         } catch (IOException ex) {
@@ -103,6 +106,7 @@ public class DragonProxy {
             ex.printStackTrace();
             return;
         }
+		//Load some more stuff
         logger.info(lang.get(Lang.INIT_LOADING, Versioning.RELEASE_VERSION));
         logger.info(lang.get(Lang.INIT_MC_PC_SUPPORT, Versioning.MINECRAFT_PC_VERSION));
         logger.info(lang.get(Lang.INIT_MC_PE_SUPPORT, Versioning.MINECRAFT_PE_VERSION));
@@ -111,8 +115,11 @@ public class DragonProxy {
             logger.severe("Invalid 'mode' option detected, must be cls/online/offline, you set it to '" + authMode + "'! ");
             return;
         }
+		
+		//Init session and command stuff
         sessionRegister = new SessionRegister(this);
         commandRegister = new CommandRegister(this);
+		
         if (IS_RELEASE) {
             try {
                 metrics = new ServerMetrics(this);

@@ -18,7 +18,8 @@ udp_bind_port: 19132
 motd: '&aServer by DragonProxy'
 
 
-# What server should we connect to by default
+# What server should we connect to by default?
+# Set the server nams in the next option
 default_server: 'my_pc_server'
 
 

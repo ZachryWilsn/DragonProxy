@@ -10,20 +10,20 @@
  *
  * @author The Dragonet Team
  */
-package org.dragonet.entity.metadata.type;
+package org.dragonet.proxy.entity.meta.type;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import org.dragonet.entity.metadata.EntityMetaData;
-import org.dragonet.entity.metadata.EntityMetaDataObject;
+import org.dragonet.proxy.entity.meta.EntityMetaData;
+import org.dragonet.proxy.entity.meta.EntityMetaDataObject;
 
-public class CoordinateMeta implements EntityMetaDataObject {
+public class SlotMeta implements EntityMetaDataObject {
 
-    public int data1;
-    public int data2;
-    public int data3;
+    public short data1;
+    public byte data2;
+    public short data3;
 
-    public CoordinateMeta(int data1, int data2, int data3) {
+    public SlotMeta(short data1, byte data2, short data3) {
         this.data1 = data1;
         this.data2 = data2;
         this.data3 = data3;
@@ -31,16 +31,16 @@ public class CoordinateMeta implements EntityMetaDataObject {
 
     @Override
     public int type() {
-        return EntityMetaData.Constants.DATA_TYPE_POS;
+        return EntityMetaData.Constants.DATA_TYPE_SLOT;
     }
 
     @Override
     public byte[] encode() {
-        ByteBuffer buff = ByteBuffer.allocate(12);
+        ByteBuffer buff = ByteBuffer.allocate(5);
         buff.order(ByteOrder.LITTLE_ENDIAN);
-        buff.putInt(this.data1);
-        buff.putInt(this.data2);
-        buff.putInt(this.data3);
+        buff.putShort(this.data1);
+        buff.put(this.data2);
+        buff.putShort(this.data3);
         return buff.array();
     }
 
