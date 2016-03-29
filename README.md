@@ -5,6 +5,8 @@
 A proxy for **Minecraft: Pocket Edition/Windows 10 Edition** connecting to multiple **Minecraft PC/Mac or Pocket Edition** servers.
 It works like BungeeCord but much more powerful than that. ;) 
 
+**Want the latest experimental features? Check out the [dev branch](https://github.com/DragonetMC/DragonProxy/tree/dev)!**
+
 You can switch between servers even between PE and PC servers by using command `/server blah`, you can change the default prefix `/` if it conflicts with BungeeCord one. 
 
 ![Screenshot](https://raw.githubusercontent.com/DragonetMC/DragonProxy/master/screenshots/TheArchon.png)
