@@ -15,7 +15,7 @@ package org.dragonet.net.packet.minecraft;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.UUID;
-import org.dragonet.entity.metadata.EntityMetaData;
+import org.dragonet.proxy.entity.meta.EntityMetaData;
 import org.dragonet.inventory.PEInventorySlot;
 import org.dragonet.net.inf.mcpe.NetworkChannel;
 import org.dragonet.proxy.utilities.io.PEBinaryWriter;
