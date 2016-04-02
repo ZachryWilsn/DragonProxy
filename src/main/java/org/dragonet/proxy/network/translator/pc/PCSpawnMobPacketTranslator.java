@@ -12,10 +12,8 @@
  */
 package org.dragonet.proxy.network.translator.pc;
 
-import org.dragonet.entity.metadata.EntityMetaData;
 import org.dragonet.net.packet.minecraft.AddEntityPacket;
 import org.dragonet.net.packet.minecraft.PEPacket;
-import org.dragonet.proxy.entity.EntityType;
 import org.dragonet.proxy.network.UpstreamSession;
 import org.dragonet.proxy.network.cache.CachedEntity;
 import org.dragonet.proxy.network.translator.EntityMetaTranslator;
