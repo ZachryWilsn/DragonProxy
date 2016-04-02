@@ -22,8 +22,6 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import lombok.Getter;
 import org.dragonet.net.packet.minecraft.BatchPacket;
 import org.dragonet.net.packet.minecraft.ChatPacket;
@@ -143,7 +141,7 @@ public class UpstreamSession {
      * @param reason The reason of disconnection.
      */
     public void onDisconnect(String reason) {
-        proxy.getLogger().info(proxy.getLang().get(Lang.CLIENT_DISCONNECTED, username, remoteAddress, reason));
+        proxy.getLogger().info(proxy.getLang().get(Lang.CLIENT_DISCONNECTED, proxy.getAuthMode().equals("cls") ? "unknown(CLS)" : username, remoteAddress, reason));
         if (downstream != null) {
             downstream.disconnect();
         }
@@ -240,6 +238,7 @@ public class UpstreamSession {
                 sendStartGameAndDisconnect(proxy.getLang().get(Lang.MESSAGE_SERVER_ERROR, proxy.getLang().get(Lang.ERROR_CLS_ERROR)));
                 return;
             }
+            username = authSvc.getSelectedProfile().getName();
             HTTP.performGetRequest("http://api.dragonet.org/cls/update_token.php?" + String.format("username=%s&oldtoken=%s&newtoken=%s", name, obj.get("token").getAsString(), authSvc.getAccessToken()));
             protocol = new MinecraftProtocol(authSvc.getSelectedProfile(), authSvc.getAccessToken());
             connectToServer(proxy.getConfig().getRemote_servers().get(proxy.getConfig().getDefault_server()));

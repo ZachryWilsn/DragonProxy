@@ -12,8 +12,11 @@
  */
 package org.dragonet.proxy;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.logging.Logger;
@@ -76,13 +79,25 @@ public class DragonProxy {
 
         //Need to initialize config before console
         try {
-            config = new Yaml().loadAs(new FileInputStream("config.yml"), ServerConfig.class);
+            File fileConfig = new File("config.yml");
+            if (!fileConfig.exists()) {
+                //Create default config
+                FileOutputStream fos = new FileOutputStream(fileConfig);
+                InputStream ins = DragonProxy.class.getResourceAsStream("/resources/config.yml");
+                int data = -1;
+                while((data = ins.read()) != -1){
+                    fos.write(data);
+                }
+                ins.close();
+                fos.close();
+            }
+            config = new Yaml().loadAs(new FileInputStream(fileConfig), ServerConfig.class);
         } catch (IOException ex) {
             logger.severe("Failed to load configuration file! Make sure the file is writable.");
             ex.printStackTrace();
             return;
         }
-		
+
         //Initialize console
         console = new ConsoleManager(this);
         console.startConsole();
