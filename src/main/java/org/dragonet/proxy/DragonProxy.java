@@ -37,7 +37,7 @@ public class DragonProxy {
     public static void main(String[] args) {
         new DragonProxy().run(args);
     }
-    public final static boolean IS_RELEASE = true; //DO NOT CHANGE, ONLY ON PRODUCTION
+    public final static boolean IS_RELEASE = false; //DO NOT CHANGE, ONLY ON PRODUCTION
 
     private final Logger logger = Logger.getLogger("DragonProxy");
 
@@ -105,7 +105,7 @@ public class DragonProxy {
 		//Check for startup arguments
         checkArguments(args);
 
-		//Should we save console log? Set it config file
+		//Should we save console log? Set it in config file
         if(config.isLog_console()){
             console.startFile("console.log");
             logger.info("Saving console output enabled"); //TODO: Translations
@@ -127,7 +127,7 @@ public class DragonProxy {
         logger.info(lang.get(Lang.INIT_MC_PE_SUPPORT, Versioning.MINECRAFT_PE_VERSION));
         authMode = config.getMode().toLowerCase();
         if(!authMode.equals("cls") && !authMode.equals("online") && !authMode.equals("offline")){
-            logger.severe("Invalid 'mode' option detected, must be cls/online/offline, you set it to '" + authMode + "'! ");
+            logger.severe("Invalid login 'mode' option detected, must be cls/online/offline, you set it to '" + authMode + "'! ");
             return;
         }
 		
@@ -141,7 +141,7 @@ public class DragonProxy {
                 metrics.start();
             } catch (IOException ex) { }
         } else {
-            logger.info("This is a development build. It may contain bugs. Do not use on production");
+            logger.info("This is a development build. It may contain bugs. Do not use on production\n");
         }
 
         //Create thread pool
@@ -176,7 +176,7 @@ public class DragonProxy {
         for(String arg : args){
             if(arg.toLowerCase().contains("--debug")){
                 isDebug = true;
-                logger.info("--- DEBUG MODE ENABLED ---");
+                logger.info("--- Proxy running in debug mode ---");
             }
         }
     }

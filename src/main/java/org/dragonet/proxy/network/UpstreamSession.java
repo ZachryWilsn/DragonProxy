@@ -155,7 +155,7 @@ public class UpstreamSession {
 
     public void onLogin(LoginPacket packet) {
         if (username != null) {
-            disconnect("An error has occured\nPlease add a username");
+            disconnect("Please add a username");
             return;
         }
 
@@ -265,7 +265,7 @@ public class UpstreamSession {
 
     public void sendStartGameAndDisconnect(String reason) {
         StartGamePacket pkStartGame = new StartGamePacket();
-        pkStartGame.dimension = (byte) 1; //Login error so player in nether(Red screen)
+        pkStartGame.dimension = (byte) 1; //Login error so player in nether (Red screen)
         pkStartGame.generator = 1;
         pkStartGame.y = 72.0f;
         sendPacket(pkStartGame, true);
