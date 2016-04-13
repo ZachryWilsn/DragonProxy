@@ -39,6 +39,7 @@ public class DragonProxy {
     }
     public final static boolean IS_RELEASE = false; //DO NOT CHANGE, ONLY ON PRODUCTION
 
+	@Getter
     private final Logger logger = Logger.getLogger("DragonProxy");
 
     private final TickerThread ticker = new TickerThread(this);
@@ -83,7 +84,7 @@ public class DragonProxy {
             if (!fileConfig.exists()) {
                 //Create default config
                 FileOutputStream fos = new FileOutputStream(fileConfig);
-                InputStream ins = DragonProxy.class.getResourceAsStream("/resources/config.yml");
+                InputStream ins = DragonProxy.class.getResourceAsStream("config.yml");
                 int data = -1;
                 while((data = ins.read()) != -1){
                     fos.write(data);
@@ -192,9 +193,5 @@ public class DragonProxy {
         } catch (Exception e) {
         }
         System.exit(0);
-    }
-    
-    public Logger getLogger() {
-        return logger;
     }
 }

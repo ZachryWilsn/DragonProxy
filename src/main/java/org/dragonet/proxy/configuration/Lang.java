@@ -88,7 +88,7 @@ public class Lang extends PropertiesConfig {
     public final static String QUERY_FAILED = "query_failed";
     
     public Lang(String langFileName) throws IOException {
-        super("/resources/en_US.properties", langFileName, false);
+        super("en_US.properties", langFileName, false);
     }
 
     public String get(String key) {

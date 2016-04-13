@@ -29,7 +29,7 @@ public class DefaultSkin {
     private static void loadSkin() {
         try {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            InputStream ins = DefaultSkin.class.getResourceAsStream("/resources/defaults/SKIN.BIN");
+            InputStream ins = DefaultSkin.class.getResourceAsStream("defaults/SKIN.BIN");
             int d = -1;
             while((d = ins.read()) != -1){
                 bos.write(d);
