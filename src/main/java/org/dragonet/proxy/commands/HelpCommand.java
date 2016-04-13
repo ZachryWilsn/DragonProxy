@@ -21,7 +21,6 @@ public class HelpCommand implements ConsoleCommand {
 		proxy.getLogger().info("\n---- All commands for DragonProxy ----");
 		proxy.getLogger().info("help - Show this help page");
 		proxy.getLogger().info("stop - Stop DragonProxy server!");
-		;
     }
 
 }
