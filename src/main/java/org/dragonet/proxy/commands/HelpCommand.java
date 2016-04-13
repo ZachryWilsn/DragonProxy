@@ -18,9 +18,10 @@ public class HelpCommand implements ConsoleCommand {
 
     @Override
     public void execute(DragonProxy proxy, String[] args) {
-		proxy.getLogger().info("\n----- All commands for DragonProxy -----");
-		proxy.getLogger().info("help - Display commands for DragonProxy");
-		proxy.getLogger().info("stop - Stop DragonProxy in its tracks!\n");
+		proxy.getLogger().info("\n---- All commands for DragonProxy ----");
+		proxy.getLogger().info("help - Show this help page");
+		proxy.getLogger().info("stop - Stop DragonProxy server!");
+		;
     }
 
 }
