@@ -16,7 +16,6 @@ import java.util.List;
 import org.spacehq.mc.protocol.data.message.ChatColor;
 import org.spacehq.mc.protocol.data.message.ChatFormat;
 import org.spacehq.mc.protocol.data.message.Message;
-import org.spacehq.mc.protocol.data.message.MessageStyle;
 
 public final class MessageTranslator {
 
