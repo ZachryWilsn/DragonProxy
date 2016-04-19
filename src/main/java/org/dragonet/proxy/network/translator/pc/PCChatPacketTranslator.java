@@ -12,11 +12,6 @@
  */
 package org.dragonet.proxy.network.translator.pc;
 
-import java.util.Iterator;
-
-import org.codehaus.jettison.json.JSONArray;
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
 import org.dragonet.net.packet.minecraft.ChatPacket;
 import org.dragonet.net.packet.minecraft.PEPacket;
 import org.dragonet.proxy.network.UpstreamSession;
