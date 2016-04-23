@@ -84,7 +84,7 @@ public class DragonProxy {
             if (!fileConfig.exists()) {
                 //Create default config
                 FileOutputStream fos = new FileOutputStream(fileConfig);
-                InputStream ins = DragonProxy.class.getResourceAsStream("config.yml");
+                InputStream ins = DragonProxy.class.getResourceAsStream("/config.yml");
                 int data = -1;
                 while((data = ins.read()) != -1){
                     fos.write(data);
@@ -103,10 +103,10 @@ public class DragonProxy {
         console = new ConsoleManager(this);
         console.startConsole();
 
-		//Check for startup arguments
+	//Check for startup arguments
         checkArguments(args);
 
-		//Should we save console log? Set it in config file
+	//Should we save console log? Set it in config file
         if(config.isLog_console()){
             console.startFile("console.log");
             logger.info("Saving console output enabled"); //TODO: Translations
@@ -114,7 +114,7 @@ public class DragonProxy {
             logger.info("Saving console output disabled");
         }
 		
-		//Load language file
+	//Load language file
         try {
             lang = new Lang(config.getLang());
         } catch (IOException ex) {
@@ -132,7 +132,7 @@ public class DragonProxy {
             return;
         }
 		
-		//Init session and command stuff
+	//Init session and command stuff
         sessionRegister = new SessionRegister(this);
         commandRegister = new CommandRegister(this);
 		
