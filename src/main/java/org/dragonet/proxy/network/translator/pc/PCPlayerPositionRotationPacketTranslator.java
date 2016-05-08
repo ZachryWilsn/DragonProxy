@@ -44,7 +44,7 @@ public class PCPlayerPositionRotationPacketTranslator implements PCPacketTransla
             cliEntity.x = packet.getX();
             cliEntity.y = packet.getY();
             cliEntity.z = packet.getZ();
-            return new PEPacket[]{pk};
+            return new PEPacket[]{phChunk, pk};
         }
 
         cliEntity.x = packet.getX();
