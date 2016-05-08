@@ -15,8 +15,11 @@ package org.dragonet.proxy.commands;
 import java.io.ByteArrayOutputStream;
 import java.util.Arrays;
 import org.dragonet.net.packet.minecraft.FullChunkPacket;
-import org.dragonet.net.packet.minecraft.MovePlayerPacket;
 import org.dragonet.net.packet.minecraft.ChangeDimensionPacket;
+import org.dragonet.net.packet.minecraft.LoginStatusPacket;
+import org.dragonet.net.packet.minecraft.MovePlayerPacket;
+import org.dragonet.net.packet.minecraft.RespawnPacket;
+import org.dragonet.net.packet.minecraft.SetHealthPacket;
 import org.dragonet.proxy.DragonProxy;
 import org.dragonet.proxy.network.UpstreamSession;
 
@@ -32,34 +35,36 @@ public class TestCommand implements ConsoleCommand {
 
         cli.sendChat("Initiating... ");
 
-        if (args.length == 1 && args[0].equals("chunk_before")) {
+        if (args.length == 1 && args[0].equals("a")) {
             cli.sendChat("Sending far chunk... ");
-            for(int x = 1490; x<1510; x++){
-                for(int z = 1240; z<1260; z++){
+            for (int x = 120; x < 180; x++) {
+                for (int z = 119; z < 132; z++) {
                     sendFarChunk(cli, x, z);
                 }
             }
-            
             //try{
             //    Thread.sleep(2000L);
             //}catch(Exception e){}
-        }
+        } else {
 
         cli.sendChat("Moving location... ");
-        //MovePlayerPacket pkMove = new MovePlayerPacket(0, 40000.0f, 64.0f, 20000.0f, 0.0f, 0.0f, 0.0f, false);
-        //pkMove.mode = MovePlayerPacket.MODE_RESET;
-        //cli.sendPacket(pkMove, true);
-        ChangeDimensionPacket pkDim = new ChangeDimensionPacket(40000, 72, 20000, (byte)1);
-        cli.sendPacket(pkDim, true);
-        
+        MovePlayerPacket pkMove = new MovePlayerPacket(0, 4000.0f, 64.0f, 2000.0f, 0.0f, 0.0f, 0.0f, false);
+        pkMove.mode = MovePlayerPacket.MODE_NORMAL;
+        cli.sendPacket(pkMove, true);
+        }
+
+        //ChangeDimensionPacket pkDim = new ChangeDimensionPacket(40000, 72, 20000, (byte)1);
+        //cli.sendPacket(pkDim, true);
+        /*
         if (args.length == 1 && args[0].equals("chunk_after")) {
             cli.sendChat("Sending far chunk... ");
-            for(int x = 1490; x<1510; x++){
-                for(int z = 1240; z<1260; z++){
+            for (int x = 1490; x < 1510; x++) {
+                for (int z = 1240; z < 1260; z++) {
                     sendFarChunk(cli, x, z);
                 }
             }
         }
+        */
     }
 
     private void sendFarChunk(UpstreamSession cli, int x, int z) {

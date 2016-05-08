@@ -14,8 +14,10 @@ package org.dragonet.proxy.network.translator.pc;
 
 import org.dragonet.net.packet.minecraft.FullChunkPacket;
 import org.dragonet.net.packet.minecraft.FullChunkPacket.ChunkOrder;
+import org.dragonet.net.packet.minecraft.LoginStatusPacket;
 import org.dragonet.net.packet.minecraft.MovePlayerPacket;
 import org.dragonet.net.packet.minecraft.PEPacket;
+import org.dragonet.net.packet.minecraft.RespawnPacket;
 import org.dragonet.proxy.network.UpstreamSession;
 import org.dragonet.proxy.network.cache.CachedEntity;
 import org.dragonet.proxy.network.translator.PCPacketTranslator;
@@ -33,23 +35,35 @@ public class PCPlayerPositionRotationPacketTranslator implements PCPacketTransla
         long dY = (long) (cliEntity.y - packet.getY()) / 16;
         long dZ = (long) (cliEntity.z - packet.getZ()) / 16;
         long squaredChunkDistance = dX * dX + dY * dY + dZ * dZ;
-        if (squaredChunkDistance > 12) {
+        if (squaredChunkDistance > 244) {
             //Before that, let's send a placeholder
+            /*
             FullChunkPacket phChunk = new FullChunkPacket();
             phChunk.chunkX = (int) (packet.getX() / 16);
             phChunk.chunkZ = (int) (packet.getZ() / 16);
             phChunk.order = ChunkOrder.COLUMNS;
             phChunk.chunkData = PlaceholderChunk.FULL_GLASS;
-
+            */
+            
+            RespawnPacket respawn = new RespawnPacket();
+            respawn.x = (float) packet.getX();
+            respawn.y = (float) packet.getY();
+            respawn.z = (float) packet.getZ();
+            
+            LoginStatusPacket status = new LoginStatusPacket();
+            status.status = LoginStatusPacket.PLAYER_SPAWN;
+            
             cliEntity.x = packet.getX();
             cliEntity.y = packet.getY();
             cliEntity.z = packet.getZ();
-            return new PEPacket[]{phChunk, pk};
+            System.out.println("USING SHIT TELEPORT");
+            return new PEPacket[]{respawn, status};
         }
 
         cliEntity.x = packet.getX();
         cliEntity.y = packet.getY();
         cliEntity.z = packet.getZ();
+        System.out.println("USING FUCK TELEPORT");
         return new PEPacket[]{pk};
     }
 
