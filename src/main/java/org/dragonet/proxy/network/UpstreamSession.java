@@ -28,11 +28,13 @@ import org.dragonet.net.packet.minecraft.ChatPacket;
 import org.dragonet.net.packet.minecraft.LoginPacket;
 import org.dragonet.net.packet.minecraft.LoginStatusPacket;
 import org.dragonet.net.packet.minecraft.PEPacket;
+import org.dragonet.net.packet.minecraft.RemoveEntityPacket;
 import org.dragonet.net.packet.minecraft.SetSpawnPositionPacket;
 import org.dragonet.net.packet.minecraft.StartGamePacket;
 import org.dragonet.net.packet.minecraft.UpdateBlockPacket;
 import org.dragonet.proxy.DesktopServer;
 import org.dragonet.proxy.DragonProxy;
+import org.dragonet.proxy.PocketServer;
 import org.dragonet.proxy.configuration.Lang;
 import org.dragonet.proxy.configuration.RemoteServer;
 import org.dragonet.proxy.network.cache.EntityCache;
@@ -86,6 +88,8 @@ public class UpstreamSession {
     @Getter
     private final WindowCache windowCache = new WindowCache(this);
 
+    protected boolean connecting;
+    
     /* ======================================================================================================= */
     private MinecraftProtocol protocol;
 
@@ -130,9 +134,15 @@ public class UpstreamSession {
         entityCache.onTick();
     }
 
+    /**
+     * Disconnected from server. 
+     * @param reason 
+     */
     public void disconnect(String reason) {
-        proxy.getNetwork().closeSession(raknetID, reason);
-        //RakNet server will call onDisconnect()
+        if(!connecting) {
+            proxy.getNetwork().closeSession(raknetID, reason);
+            //RakNet server will call onDisconnect()
+        }
     }
 
     /**
@@ -249,8 +259,20 @@ public class UpstreamSession {
     }
     
     public void connectToServer(RemoteServer server){
+        connecting = true;
         if(downstream != null && downstream.isConnected()){
-            //TODO: We have to disconnnect
+            downstream.disconnect();
+            // TODO: Send chat message about server change. 
+            
+            // Remove all loaded entities
+            BatchPacket batch = new BatchPacket();
+            this.entityCache.getEntities().entrySet().forEach((ent) -> {
+                if(ent.getKey() != 0){
+                    batch.packets.add(new RemoveEntityPacket(ent.getKey()));
+                }
+            });
+            this.entityCache.reset(true);
+            sendPacket(batch, true);
             return;
         }
         if(server == null) return;
@@ -259,7 +281,8 @@ public class UpstreamSession {
             ((PCDownstreamSession)downstream).setProtocol(protocol);
             ((PCDownstreamSession)downstream).connect(server.getRemoteAddr(), server.getRemotePort());
         }else{
-            //TODO
+            downstream = new PEDownstreamSession(proxy, this);
+            ((PEDownstreamSession)downstream).connect((PocketServer) server);
         }
     }
 
@@ -340,5 +363,9 @@ public class UpstreamSession {
             proxy.getLogger().info(proxy.getLang().get(Lang.MESSAGE_ONLINE_LOGIN_SUCCESS_CONSOLE, username, remoteAddress, username));
             connectToServer(proxy.getConfig().getRemote_servers().get(proxy.getConfig().getDefault_server()));
         });
+    }
+    
+    public void onConnected(){
+        connecting = false;
     }
 }

@@ -44,9 +44,9 @@ public class ClientHandler {
         sendEncapsulated("", packet, flags);
     }
 
-    public void sendEncapsulated(String identifier, EncapsulatedPacket packet, byte flags){
+    public void sendEncapsulated(String identifier, EncapsulatedPacket packet, int flags){
         ByteBuffer bb = ByteBuffer.allocate(packet.getTotalLength());
-        bb.put(RakNet.PACKET_ENCAPSULATED).put((byte) identifier.getBytes().length).put(identifier.getBytes()).put(flags).put(packet.toBinary(true));
+        bb.put(RakNet.PACKET_ENCAPSULATED).put((byte) identifier.getBytes().length).put(identifier.getBytes()).put((byte)(flags & 0xFF)).put(packet.toBinary(true));
         client.pushMainToThreadPacket(Arrays.copyOf(bb.array(), bb.position()));
         bb = null;
     }
@@ -92,7 +92,7 @@ public class ClientHandler {
             int offset = 1;
             if(id == RakNet.PACKET_ENCAPSULATED){
                 int len = packet[offset++];
-                String identifier = new String(Binary.subbytes(packet, offset, len));
+                //String identifier = new String(Binary.subbytes(packet, offset, len));
                 offset += len;
                 byte flags = packet[offset++];
                 byte[] buffer = Binary.subbytes(packet, offset);
