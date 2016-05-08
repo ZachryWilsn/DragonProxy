@@ -17,13 +17,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with JRakLib.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.beaconpe.jraklib;
-
+package org.dragonet.raknet.client;
 
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * Binary Utility class for writing/reading.
