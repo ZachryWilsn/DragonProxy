@@ -52,13 +52,10 @@ public class StartGamePacket extends PEPacket {
             writer.writeFloat(this.x);
             writer.writeFloat(this.y + 1.62f);
             writer.writeFloat(this.z);
-            writer.writeByte((byte) 0);
-            
-            //Unknown stuff
-            writer.writeByte((byte) 0x01);
-            writer.writeByte((byte) 0x01);
+            writer.writeByte((byte) 0x01); //userPerm
+            writer.writeByte((byte) 0x01); //globalPerm
             writer.writeByte((byte) 0x00);
-            writer.writeString("");
+            writer.writeString(""); //Unknown string
             this.setData(bos.toByteArray());
         } catch (IOException e) {
         }
