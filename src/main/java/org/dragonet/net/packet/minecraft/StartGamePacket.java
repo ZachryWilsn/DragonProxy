@@ -12,8 +12,10 @@
  */
 package org.dragonet.net.packet.minecraft;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import org.dragonet.proxy.utilities.io.PEBinaryReader;
 import org.dragonet.proxy.utilities.io.PEBinaryWriter;
 
 public class StartGamePacket extends PEPacket {
@@ -63,6 +65,24 @@ public class StartGamePacket extends PEPacket {
 
     @Override
     public void decode() {
+        try {
+            PEBinaryReader reader = new PEBinaryReader(new ByteArrayInputStream(this.getData()));
+            reader.readByte(); //PID
+            seed = reader.readInt();
+            dimension = reader.readByte();
+            generator = reader.readInt();
+            gamemode = reader.readInt();
+            eid = reader.readLong();
+            spawnX = reader.readInt();
+            spawnY = reader.readInt();
+            spawnZ = reader.readInt();
+            x = reader.readFloat();
+            y = reader.readFloat() - 1.62f;
+            z = reader.readFloat();
+            // Ignore the rest of the packet
+            // ...
+        } catch (IOException e) {
+        }
     }
 
 }

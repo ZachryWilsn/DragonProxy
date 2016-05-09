@@ -20,7 +20,10 @@ import org.dragonet.net.packet.Protocol;
 import org.dragonet.net.packet.minecraft.BatchPacket;
 import org.dragonet.net.packet.minecraft.ChatPacket;
 import org.dragonet.net.packet.minecraft.LoginPacket;
+import org.dragonet.net.packet.minecraft.MovePlayerPacket;
 import org.dragonet.net.packet.minecraft.PEPacket;
+import org.dragonet.net.packet.minecraft.SetSpawnPositionPacket;
+import org.dragonet.net.packet.minecraft.StartGamePacket;
 import org.dragonet.proxy.DragonProxy;
 import org.dragonet.proxy.PocketServer;
 import org.dragonet.proxy.utilities.Binary;
@@ -33,6 +36,8 @@ import org.dragonet.raknet.protocol.EncapsulatedPacket;
 
 public class PEDownstreamSession implements DownstreamSession<PEPacket>, ClientInstance {
 
+    public final static String ENTITY_ID_KEY = "ENTITYID";
+    
     private JRakLibClient client;
     private ClientHandler handler;
 
@@ -109,6 +114,9 @@ public class PEDownstreamSession implements DownstreamSession<PEPacket>, ClientI
         pkLogin.protocol2 = Versioning.MINECRAFT_PE_PROTOCOL;
         pkLogin.serverAddress = "0.0.0.0:0";
         pkLogin.username = upstream.getUsername();
+        
+        System.out.println("[DEBUG] Remote pocket server downstream established! ");
+        
         sendPacket(pkLogin, true);
     }
 
@@ -116,20 +124,29 @@ public class PEDownstreamSession implements DownstreamSession<PEPacket>, ClientI
     public void connectionClosed(String reason) {
         connected = false;
         upstream.disconnect(reason);
+        System.out.println("[DEBUG] Remote pocket server downstream CLOSED! ");
     }
 
     @Override
     public void handleEncapsulated(EncapsulatedPacket packet, int flags) {
-        packet.messageIndex = 0;
-        handler.sendEncapsulated(packet);
-        /*
         byte[] buffer = Arrays.copyOfRange(packet.buffer, 1, packet.buffer.length);
         PEPacket pk = Protocol.decode(buffer);
-        if(pk == null){
-            packet.messageIndex = 0;
-            handler.sendEncapsulated(packet);
+        if(StartGamePacket.class.isAssignableFrom(pk.getClass())){
+            // Translate
+            StartGamePacket start = (StartGamePacket) pk;
+            upstream.getDataCache().put(ENTITY_ID_KEY, (long) start.eid);
+            
+            SetSpawnPositionPacket spawn = new SetSpawnPositionPacket();
+            spawn.x = start.spawnX;
+            spawn.y = start.spawnY;
+            spawn.z = start.spawnZ;
+            upstream.sendPacket(spawn, true);
+            
+            MovePlayerPacket teleport = new MovePlayerPacket(0L, start.x, start.y, start.z, 0.0f, 0.0f, 0.0f, true);
+            upstream.sendPacket(teleport, true);
             return;
-        }*/
+        }
+        upstream.sendPacket(pk);
     }
 
     @Override
