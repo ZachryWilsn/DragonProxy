@@ -67,6 +67,6 @@ public final class Protocol {
             } catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             }
         }
-        return null;
+        return new UnknownPacket(pid, data);
     }
 }

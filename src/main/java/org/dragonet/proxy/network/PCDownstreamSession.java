@@ -15,6 +15,7 @@ package org.dragonet.proxy.network;
 import lombok.Getter;
 import lombok.Setter;
 import org.dragonet.net.packet.minecraft.PEPacket;
+import org.dragonet.proxy.DesktopServer;
 import org.dragonet.proxy.DragonProxy;
 import org.dragonet.proxy.configuration.Lang;
 import org.spacehq.mc.protocol.MinecraftProtocol;
@@ -38,6 +39,8 @@ public class PCDownstreamSession implements DownstreamSession<Packet> {
     @Getter
     private final UpstreamSession upstream;
 
+    private DesktopServer serverInfo;
+    
     private Client remoteClient;
     
     @Getter
@@ -66,9 +69,15 @@ public class PCDownstreamSession implements DownstreamSession<Packet> {
         remoteClient.getSession().send(packet);
     }
 
+    public void connect(DesktopServer serverInfo){
+        this.serverInfo = serverInfo;
+        connect(serverInfo.getRemoteAddr(), serverInfo.getRemotePort());
+    }
+    
     @Override
     public void connect(String addr, int port) {
         if (this.protocol == null) {
+            upstream.onConnected(); // Clear the flags
             upstream.disconnect("ERROR! ");
             return;
         }
@@ -77,6 +86,7 @@ public class PCDownstreamSession implements DownstreamSession<Packet> {
             @Override
             public void connected(ConnectedEvent event) {
                 proxy.getLogger().info(proxy.getLang().get(Lang.MESSAGE_REMOTE_CONNECTED, upstream.getUsername(), upstream.getRemoteAddress()));
+                upstream.onConnected();
             }
 
             @Override

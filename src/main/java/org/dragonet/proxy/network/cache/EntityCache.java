@@ -30,12 +30,18 @@ public final class EntityCache {
     @Getter
     private final UpstreamSession upstream;
 
+    @Getter
     private final Map<Integer, CachedEntity> entities = Collections.synchronizedMap(new HashMap<Integer, CachedEntity>());
 
     private final List<Integer> playerEntities = Collections.synchronizedList(new ArrayList<Integer>());
 
     public EntityCache(UpstreamSession upstream) {
         this.upstream = upstream;
+        reset(false);
+    }
+    
+    public void reset(boolean clear){
+        if (clear) entities.clear();
         CachedEntity clientEntity = new CachedEntity(0, -1, null, null, true, null);
         entities.put(0, clientEntity);
     }
