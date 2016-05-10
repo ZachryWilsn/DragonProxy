@@ -106,7 +106,7 @@ public class ConnectionManager {
         try {
             tickProcessor();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
