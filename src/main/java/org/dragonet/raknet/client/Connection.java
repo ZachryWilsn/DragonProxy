@@ -220,6 +220,7 @@ public class Connection {
     }
 
     private void sendPacket(Packet pk) throws IOException {
+        System.out.println("[DEBUG] Sending to remote " + pk.getClass().getSimpleName() + " (@Connection.java:223)");
         manager.sendPacket(pk, manager.getClient().getServerIP(), manager.getClient().getServerPort());
     }
 
@@ -358,6 +359,11 @@ public class Connection {
     }
 
     private void handleEncapsulatedPacket(EncapsulatedPacket packet) throws IOException {
+        if(packet == null){
+            System.out.println("[ERROR] NULL ENCAPSULATED PACKET! ");
+            return;
+        }
+        System.out.println("Recieved encapulated packet INDEX=" + packet.messageIndex);
         if(packet.messageIndex == -1){
             handleEncapsulatedPacketRoute(packet);
         } else {
@@ -476,6 +482,7 @@ public class Connection {
     }
 
     public void handlePacket(Packet packet) throws IOException{
+        System.out.println("[DEBUG] Recieved " + packet.getClass().getSimpleName() + " (@ Connection.java:484)");
         isActive = true;
         lastUpdate = Instant.now().toEpochMilli();
         if(state == STATE_CONNECTED || state == STATE_CONNECTING_3){

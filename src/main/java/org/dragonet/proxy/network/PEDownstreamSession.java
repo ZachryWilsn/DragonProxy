@@ -62,6 +62,7 @@ public class PEDownstreamSession implements DownstreamSession<PEPacket>, ClientI
 
     @Override
     public void connect(String addr, int port) {
+        System.out.println("[" + upstream.getUsername() + "] Connecting to remote pocket server at [" + String.format("%s:%s", addr, port) + "] ");
         if (client != null) {
             upstream.onConnected(); // Clear the flags
             upstream.disconnect("ERROR! ");

@@ -15,7 +15,6 @@ package org.dragonet.proxy.commands;
 import java.io.ByteArrayOutputStream;
 import java.util.Arrays;
 import org.dragonet.net.packet.minecraft.FullChunkPacket;
-import org.dragonet.net.packet.minecraft.MovePlayerPacket;
 import org.dragonet.net.packet.minecraft.ChangeDimensionPacket;
 import org.dragonet.proxy.DragonProxy;
 import org.dragonet.proxy.network.UpstreamSession;
@@ -49,7 +48,7 @@ public class TestCommand implements ConsoleCommand {
         //MovePlayerPacket pkMove = new MovePlayerPacket(0, 40000.0f, 64.0f, 20000.0f, 0.0f, 0.0f, 0.0f, false);
         //pkMove.mode = MovePlayerPacket.MODE_RESET;
         //cli.sendPacket(pkMove, true);
-        ChangeDimensionPacket pkDim = new ChangeDimensionPacket(40000, 72, 20000, (byte)1);
+        ChangeDimensionPacket pkDim = new ChangeDimensionPacket((byte)1, 40000, 72, 20000, (byte)0);
         cli.sendPacket(pkDim, true);
         
         if (args.length == 1 && args[0].equals("chunk_after")) {

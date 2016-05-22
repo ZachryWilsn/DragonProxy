@@ -251,14 +251,19 @@ public class UpstreamSession {
             username = authSvc.getSelectedProfile().getName();
             HTTP.performGetRequest("http://api.dragonet.org/cls/update_token.php?" + String.format("username=%s&oldtoken=%s&newtoken=%s", name, obj.get("token").getAsString(), authSvc.getAccessToken()));
             protocol = new MinecraftProtocol(authSvc.getSelectedProfile(), authSvc.getAccessToken());
+            
+            System.out.println("[DEBUG] Initially joining [" + proxy.getConfig().getDefault_server() + "]... ");
             connectToServer(proxy.getConfig().getRemote_servers().get(proxy.getConfig().getDefault_server()));
         } else {
             protocol = new MinecraftProtocol(username);
+            
+            System.out.println("[DEBUG] Initially joining [" + proxy.getConfig().getDefault_server() + "]... ");
             connectToServer(proxy.getConfig().getRemote_servers().get(proxy.getConfig().getDefault_server()));
         }
     }
     
     public void connectToServer(RemoteServer server){
+        if(server == null) return;
         connecting = true;
         if(downstream != null && downstream.isConnected()){
             downstream.disconnect();
@@ -275,7 +280,6 @@ public class UpstreamSession {
             sendPacket(batch, true);
             return;
         }
-        if(server == null) return;
         if(server.getClass().isAssignableFrom(DesktopServer.class)){
             downstream = new PCDownstreamSession(proxy, this);
             ((PCDownstreamSession)downstream).setProtocol(protocol);

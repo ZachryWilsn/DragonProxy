@@ -77,7 +77,9 @@ public class ConnectionManager {
     }
 
     private boolean connect(int payloadSize, int packets) throws IOException {
+        System.out.println("[DEBUG] Client connecting, PLOAD=" + payloadSize + ", TRIES=" + packets);
         for(int i = 0; i < packets; i++){
+            System.out.println("[DEBUG] Trying to connect, TRY=" + i + "... ");
             OPEN_CONNECTION_REQUEST_1 request1 = new OPEN_CONNECTION_REQUEST_1();
             request1.protocol = RakNet.PROTOCOL;
             request1.mtuSize = (short) payloadSize;

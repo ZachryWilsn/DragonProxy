@@ -39,6 +39,7 @@ public class PCDownstreamSession implements DownstreamSession<Packet> {
     @Getter
     private final UpstreamSession upstream;
 
+    @Getter
     private DesktopServer serverInfo;
     
     private Client remoteClient;
