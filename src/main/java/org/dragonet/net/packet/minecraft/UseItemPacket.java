@@ -30,6 +30,7 @@ public class UseItemPacket extends PEPacket {
     public float posX;
     public float posY;
     public float posZ;
+    public int slot;
 
     public UseItemPacket(byte[] data) {
         this.setData(data);
@@ -59,6 +60,7 @@ public class UseItemPacket extends PEPacket {
             this.posX = reader.readFloat();
             this.posY = reader.readFloat();
             this.posZ = reader.readFloat();
+            this.slot = reader.readInt();
             this.item = PEInventorySlot.readSlot(reader);
         } catch (IOException e) {
         }
