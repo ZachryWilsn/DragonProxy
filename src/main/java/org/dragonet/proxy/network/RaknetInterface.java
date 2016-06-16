@@ -40,6 +40,8 @@ public class RaknetInterface implements ServerInstance {
     @Getter
     private final ServerHandler handler;
 
+    public static final String MAGIC_BYTE = "\\xfe";
+
     public RaknetInterface(DragonProxy proxy, String ip, int port) {
         this.proxy = proxy;
         rakServer = new RakNetServer(port, ip);
@@ -122,7 +124,7 @@ public class RaknetInterface implements ServerInstance {
         }
 
         EncapsulatedPacket encapsulated = new EncapsulatedPacket();
-        encapsulated.buffer = Binary.appendBytes((byte)0x8e, packet.getData());
+        encapsulated.buffer = Binary.appendBytes((byte) 0xfe, packet.getData());
         encapsulated.needACK = true;
         encapsulated.reliability = (byte) 2;
         encapsulated.messageIndex = 0;

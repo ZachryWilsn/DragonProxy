@@ -20,8 +20,8 @@ public class Versioning {
     public final static int MINECRAFT_PC_PROTOCOL = 47;
 
     // This is STRICT to MCPE binary's definition, DO NOT CHANGE
-    public final static String MINECRAFT_PE_VERSION = "0.14.3";
+    public final static String MINECRAFT_PE_VERSION = "0.15.0.0";
     
-    public final static int MINECRAFT_PE_PROTOCOL = 70;
+    public final static int MINECRAFT_PE_PROTOCOL = 81;
 
 }
