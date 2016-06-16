@@ -4,6 +4,7 @@
 ```html
 Currently updating to 0.15!
 ```
+Wanna donate to help us? Go to http://dragonet.org/donate.php
 
 A proxy for **Minecraft: Pocket Edition/Windows 10 Edition** connecting to multiple **Minecraft PC/Mac or Pocket Edition** servers.
 It works like BungeeCord but much more powerful than that. ;)
