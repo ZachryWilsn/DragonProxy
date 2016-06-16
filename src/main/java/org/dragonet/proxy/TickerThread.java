@@ -24,7 +24,7 @@ public class TickerThread extends Thread {
     @Override
     public void run() {
         long time;
-        while (!proxy.isShuttingDown()) {
+        while (true) { // HACK (Somewhere something is setting isShuttingDown to true)
             time = System.currentTimeMillis();
             proxy.onTick();
             time = System.currentTimeMillis() - time;

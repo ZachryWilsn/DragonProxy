@@ -31,7 +31,7 @@ public class TestCommand implements ConsoleCommand {
 
         cli.sendChat("Initiating... ");
 
-        if (args.length == 1 && args[0].equals("chunk_before")) {
+        /*if (args.length == 1 && args[0].equals("chunk_before")) {
             cli.sendChat("Sending far chunk... ");
             for(int x = 1490; x<1510; x++){
                 for(int z = 1240; z<1260; z++){
@@ -58,7 +58,7 @@ public class TestCommand implements ConsoleCommand {
                     sendFarChunk(cli, x, z);
                 }
             }
-        }
+        }*/
     }
 
     private void sendFarChunk(UpstreamSession cli, int x, int z) {

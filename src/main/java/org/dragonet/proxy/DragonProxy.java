@@ -142,7 +142,7 @@ public class DragonProxy {
                 metrics.start();
             } catch (IOException ex) { }
         } else {
-            logger.info("This is a development build. It may contain bugs. Do not use on production\n");
+            logger.warning("This is a development build. It may contain bugs. Do not use on production\n");
         }
 
         //Create thread pool
@@ -192,6 +192,7 @@ public class DragonProxy {
             Thread.sleep(2000); //Wait for all clients disconnected
         } catch (Exception e) {
         }
+        logger.info("Goodbye!");
         System.exit(0);
     }
 }
