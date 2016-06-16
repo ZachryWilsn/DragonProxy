@@ -14,31 +14,28 @@ package org.dragonet.net.packet.minecraft;
 
 public final class PEPacketIDs {
 
-    /**
-     * Actual Minecraft: PE protocol version
-     */
     public static final byte PING = (byte) 0x00;
     public static final byte PONG = (byte) 0x00;
     public static final byte CLIENT_CONNECT = (byte) 0x09;
     public static final byte SERVER_HANDSHAKE = (byte) 0x10;
     public static final byte CLIENT_HANDSHAKE = (byte) 0x13;
 
-    public final static byte LOGIN_PACKET = (byte) 0x8f;
-    public final static byte PLAY_STATUS_PACKET = (byte) 0x90;
-    public final static byte DISCONNECT_PACKET = (byte) 0x91;
-    public final static byte BATCH_PACKET = (byte) 0x92;
-    public final static byte TEXT_PACKET = (byte) 0x93;
-    public final static byte SET_TIME_PACKET = (byte) 0x94;
-    public final static byte START_GAME_PACKET = (byte) 0x95;
-    public final static byte ADD_PLAYER_PACKET = (byte) 0x96;
-    public final static byte REMOVE_PLAYER_PACKET = (byte) 0x97;
-    public final static byte ADD_ENTITY_PACKET = (byte) 0x98;
-    public final static byte REMOVE_ENTITY_PACKET = (byte) 0x99;
-    public final static byte ADD_ITEM_ENTITY_PACKET = (byte) 0x9a;
-    public final static byte TAKE_ITEM_ENTITY_PACKET = (byte) 0x9b;
-    public final static byte MOVE_ENTITY_PACKET = (byte) 0x9c;
-    public final static byte MOVE_PLAYER_PACKET = (byte) 0x9d;
-    public final static byte REMOVE_BLOCK_PACKET = (byte) 0x9e;
+    public final static byte LOGIN_PACKET = (byte) 0x01;
+    public final static byte PLAY_STATUS_PACKET = (byte) 0x02;
+    public final static byte DISCONNECT_PACKET = (byte) 0x05;
+    public final static byte BATCH_PACKET = (byte) 0x06;
+    public final static byte TEXT_PACKET = (byte) 0x07;
+    public final static byte SET_TIME_PACKET = (byte) 0x08;
+    public final static byte START_GAME_PACKET = (byte) 0x09;
+    public final static byte ADD_PLAYER_PACKET = (byte) 0x0a;
+    public final static byte REMOVE_PLAYER_PACKET = (byte) 0x0b;
+    public final static byte ADD_ENTITY_PACKET = (byte) 0x0c;
+    public final static byte REMOVE_ENTITY_PACKET = (byte) 0x0d;
+    public final static byte ADD_ITEM_ENTITY_PACKET = (byte) 0x0e;
+    public final static byte TAKE_ITEM_ENTITY_PACKET = (byte) 0x0f;
+    public final static byte MOVE_ENTITY_PACKET = (byte) 0x10;
+    public final static byte MOVE_PLAYER_PACKET = (byte) 0x11;
+    public final static byte REMOVE_BLOCK_PACKET = (byte) 0x12;
     public final static byte UPDATE_BLOCK_PACKET = (byte) 0x9f;
     public final static byte ADD_PAINTING_PACKET = (byte) 0xa0;
     public final static byte EXPLODE_PACKET = (byte) 0xa1;

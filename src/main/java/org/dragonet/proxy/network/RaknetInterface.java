@@ -40,8 +40,6 @@ public class RaknetInterface implements ServerInstance {
     @Getter
     private final ServerHandler handler;
 
-    public static final String MAGIC_BYTE = "\\xfe";
-
     public RaknetInterface(DragonProxy proxy, String ip, int port) {
         this.proxy = proxy;
         rakServer = new RakNetServer(port, ip);
