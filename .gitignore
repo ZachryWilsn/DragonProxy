@@ -13,5 +13,6 @@ target
 !.gitattributes
 worlds
 logs
-config
+config.yml
+console.log
 dependency-reduced-pom.xml

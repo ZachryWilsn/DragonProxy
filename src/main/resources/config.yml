@@ -1,7 +1,8 @@
 # =================================
 #| DragonProxy Configuration File  |
-#|    Sponsered by BytePowered     |
+#|       A BytePowered Team        |
 # =================================
+# https://GitHub.com/DragonetMC/DragonProxy/wiki
 
 # Language file
 # Default = English
@@ -9,7 +10,7 @@ lang: default
 
 
 # What IP and port to bind on your own computer/server. 
-# IP 0.0.0.0 means bind to all IP addresses available on your own computer/server. 
+# IP 0.0.0.0 means bind to all IP addresses available on your own computer/server.
 udp_bind_ip: '0.0.0.0'
 udp_bind_port: 19132
 
@@ -39,16 +40,16 @@ remote_servers:
 
 
 # Server Authentication Modes
-# cls     : Use Dragonet CLS(central login system) @ http://auth.dragonet.org
+# cls     : Use Dragonet CLS (central login system) @ http://auth.dragonet.org
 #           Dragonet CLS will authenticate Minecraft accounts automatically
 #           so you don't have to type in password again and again. 
-# online  : Traditional login screen by DragonProxy, BUGGY
+# online  : Traditional login screen by DragonProxy, BUGGY.
 # offline : Run the server in offline mode so you can't join premium 
 #           servers like Hypixel. 
 mode: cls
 
 
-# The in-game command prefix for players, by default it's Minecraft command prefix (a slash). 
+# The in-game command prefix for players, by default it's Minecraft command prefix (a slash).
 command_prefix: '/'
 
 
