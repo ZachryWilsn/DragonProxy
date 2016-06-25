@@ -26,6 +26,7 @@ import org.dragonet.proxy.network.RaknetInterface;
 import org.dragonet.proxy.configuration.Lang;
 import org.dragonet.proxy.configuration.ServerConfig;
 import org.dragonet.proxy.utilities.Versioning;
+import org.dragonet.proxy.utilities.Terminal;
 import org.dragonet.proxy.commands.CommandRegister;
 
 import org.mcstats.Metrics;
@@ -37,7 +38,7 @@ public class DragonProxy {
     public static void main(String[] args) {
         new DragonProxy().run(args);
     }
-    public final static boolean IS_RELEASE = true; //DO NOT CHANGE, ONLY ON PRODUCTION
+    public final static boolean IS_RELEASE = false; //DO NOT CHANGE, ONLY ON PRODUCTION
 
 	@Getter
     private final Logger logger = Logger.getLogger("DragonProxy");
@@ -77,7 +78,6 @@ public class DragonProxy {
     private boolean isDebug = false;
 
     public void run(String[] args) {
-
         //Need to initialize config before console
         try {
             File fileConfig = new File("config.yml");
@@ -102,11 +102,16 @@ public class DragonProxy {
         //Initialize console
         console = new ConsoleManager(this);
         console.startConsole();
+		
+		//Put at the top instead
+		if(!IS_RELEASE) {
+			logger.warning(Terminal.YELLOW + "This is a development build. It may contain bugs. Do not use on production. !!\n" + Terminal.WHITE);
+		}
 
-	//Check for startup arguments
+		//Check for startup arguments
         checkArguments(args);
 
-	//Should we save console log? Set it in config file
+		//Should we save console log? Set it in config file
         if(config.isLog_console()){
             console.startFile("console.log");
             logger.info("Saving console output enabled"); //TODO: Translations
@@ -114,7 +119,7 @@ public class DragonProxy {
             logger.info("Saving console output disabled");
         }
 		
-	//Load language file
+		//Load language file
         try {
             lang = new Lang(config.getLang());
         } catch (IOException ex) {
@@ -132,7 +137,7 @@ public class DragonProxy {
             return;
         }
 		
-	//Init session and command stuff
+		//Init session and command stuff
         sessionRegister = new SessionRegister(this);
         commandRegister = new CommandRegister(this);
 		
@@ -141,8 +146,6 @@ public class DragonProxy {
                 metrics = new ServerMetrics(this);
                 metrics.start();
             } catch (IOException ex) { }
-        } else {
-            logger.warning("This is a development build. It may contain bugs. Do not use on production\n");
         }
 
         //Create thread pool
@@ -177,7 +180,7 @@ public class DragonProxy {
         for(String arg : args){
             if(arg.toLowerCase().contains("--debug")){
                 isDebug = true;
-                logger.info("--- Proxy running in debug mode ---");
+                logger.info("Proxy running in debug mode.");
             }
         }
     }
