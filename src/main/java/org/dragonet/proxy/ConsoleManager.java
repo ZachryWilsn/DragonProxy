@@ -19,6 +19,8 @@ import java.util.logging.*;
 import java.util.logging.Formatter;
 import jline.console.ConsoleReader;
 
+import org.dragonet.proxy.utilities.Terminal;
+
 public class ConsoleManager {
 
     private static final String CONSOLE_DATE = "HH:mm:ss";
@@ -207,7 +209,9 @@ public class ConsoleManager {
         public String format(LogRecord record) {
             StringBuilder builder = new StringBuilder();
 
+			builder.append(Terminal.CYAN + "[");
             builder.append(date.format(record.getMillis()));
+			builder.append("]" + Terminal.WHITE);
             builder.append(" [");
             builder.append(record.getLevel().getLocalizedName().toUpperCase());
             builder.append("] ");
