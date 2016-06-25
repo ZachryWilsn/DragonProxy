@@ -1,4 +1,4 @@
-/*
+﻿/*
  * GNU LESSER GENERAL PUBLIC LICENSE
  *                       Version 3, 29 June 2007
  *
@@ -40,7 +40,7 @@ public class DragonProxy {
     }
     public final static boolean IS_RELEASE = false; //DO NOT CHANGE, ONLY ON PRODUCTION
 
-	@Getter
+    @Getter
     private final Logger logger = Logger.getLogger("DragonProxy");
 
     private final TickerThread ticker = new TickerThread(this);
@@ -103,15 +103,15 @@ public class DragonProxy {
         console = new ConsoleManager(this);
         console.startConsole();
 		
-		//Put at the top instead
-		if(!IS_RELEASE) {
-			logger.warning(Terminal.YELLOW + "This is a development build. It may contain bugs. Do not use on production. !!\n" + Terminal.WHITE);
-		}
+	//Put at the top instead
+	if(!IS_RELEASE) {
+		logger.warning(Terminal.YELLOW + "This is a development build. It may contain bugs. Do not use on production. !!\n" + Terminal.WHITE);
+	}
 
-		//Check for startup arguments
+	//Check for startup arguments
         checkArguments(args);
 
-		//Should we save console log? Set it in config file
+	//Should we save console log? Set it in config file
         if(config.isLog_console()){
             console.startFile("console.log");
             logger.info("Saving console output enabled"); //TODO: Translations
@@ -119,7 +119,7 @@ public class DragonProxy {
             logger.info("Saving console output disabled");
         }
 		
-		//Load language file
+	//Load language file
         try {
             lang = new Lang(config.getLang());
         } catch (IOException ex) {
@@ -127,7 +127,7 @@ public class DragonProxy {
             ex.printStackTrace();
             return;
         }
-		//Load some more stuff
+	//Load some more stuff
         logger.info(lang.get(Lang.INIT_LOADING, Versioning.RELEASE_VERSION));
         logger.info(lang.get(Lang.INIT_MC_PC_SUPPORT, Versioning.MINECRAFT_PC_VERSION));
         logger.info(lang.get(Lang.INIT_MC_PE_SUPPORT, Versioning.MINECRAFT_PE_VERSION));
@@ -137,7 +137,7 @@ public class DragonProxy {
             return;
         }
 		
-		//Init session and command stuff
+	//Init session and command stuff
         sessionRegister = new SessionRegister(this);
         commandRegister = new CommandRegister(this);
 		

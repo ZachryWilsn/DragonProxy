@@ -4,7 +4,7 @@ package org.dragonet.proxy.utilities;
 //TODO: Make enum
 public class Terminal {
 	public static final String ITALIC		= "\u001B[3m";
-	public static final String UNDERLINE	= "\u001B[4m";
+	public static final String UNDERLINE		= "\u001B[4m";
 	
 	public static final String BLACK		= "\u001B[30m";
 	public static final String RED			= "\u001B[31m";
