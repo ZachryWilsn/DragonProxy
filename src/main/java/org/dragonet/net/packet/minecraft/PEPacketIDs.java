@@ -76,6 +76,7 @@ public final class PEPacketIDs {
     //public final static byte TELEMETRY_EVENT_PACKET = (byte) 0xc4;
     //public final static byte SPAWN_EXPERIENCE_ORB_PACKET = (byte) 0xc5
     public final static byte CLIENTBOUND_MAP_ITEM_DATA_PACKET = (byte) 0x3b;
+	public final static byte REQUEST_CHUNK_RADIUS_PACKET = (byte) 0x3d;
 	public final static byte CHUNK_RADIUS_UPDATED_PACKET = (byte) 0x3e;
     public final static byte REPLACE_SELECTED_ITEM_PACKET = (byte) 0x40;
 }
