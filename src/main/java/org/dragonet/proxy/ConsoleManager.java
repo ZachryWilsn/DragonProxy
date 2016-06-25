@@ -209,9 +209,9 @@ public class ConsoleManager {
         public String format(LogRecord record) {
             StringBuilder builder = new StringBuilder();
 
-			builder.append(Terminal.CYAN + "[");
+	    builder.append(Terminal.CYAN + "[");
             builder.append(date.format(record.getMillis()));
-			builder.append("]" + Terminal.WHITE);
+	    builder.append("]" + Terminal.WHITE);
             builder.append(" [");
             builder.append(record.getLevel().getLocalizedName().toUpperCase());
             builder.append("] ");
