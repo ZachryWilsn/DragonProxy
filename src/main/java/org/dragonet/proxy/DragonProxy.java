@@ -1,4 +1,4 @@
-﻿/*
+/*
  * GNU LESSER GENERAL PUBLIC LICENSE
  *                       Version 3, 29 June 2007
  *
@@ -133,7 +133,7 @@ public class DragonProxy {
         logger.info(lang.get(Lang.INIT_MC_PE_SUPPORT, Versioning.MINECRAFT_PE_VERSION));
         authMode = config.getMode().toLowerCase();
         if(!authMode.equals("cls") && !authMode.equals("online") && !authMode.equals("offline")){
-            logger.severe("Invalid login 'mode' option detected, must be cls/online/offline, you set it to '" + authMode + "'! ");
+            logger.severe("Invalid login 'mode' option detected, must be cls/online/offline. You set it to '" + authMode + "'! ");
             return;
         }
 		
@@ -180,7 +180,7 @@ public class DragonProxy {
         for(String arg : args){
             if(arg.toLowerCase().contains("--debug")){
                 isDebug = true;
-                logger.info("Proxy running in debug mode.");
+                logger.info(Terminal.CYAN + "Proxy running in debug mode.");
             }
         }
     }
@@ -195,7 +195,7 @@ public class DragonProxy {
             Thread.sleep(2000); //Wait for all clients disconnected
         } catch (Exception e) {
         }
-        logger.info("Goodbye!");
+        System.out.println("Goodbye!");
         System.exit(0);
     }
 }

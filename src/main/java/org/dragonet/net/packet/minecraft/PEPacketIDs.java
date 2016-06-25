@@ -69,12 +69,13 @@ public final class PEPacketIDs {
     public final static byte BLOCK_ENTITY_DATA_PACKET = (byte) 0xbd;
     //public final static byte PLAYER_INPUT_PACKET = (byte) 0xbe;
     public final static byte FULL_CHUNK_DATA_PACKET = (byte) 0xbf;
-    public final static byte SET_DIFFICULTY_PACKET = (byte) 0xc0;
-    public final static byte CHANGE_DIMENSION_PACKET = (byte) 0xc1;
-    public final static byte SET_PLAYER_GAMETYPE_PACKET = (byte) 0xc2;
-    public final static byte PLAYER_LIST_PACKET = (byte) 0xc3;
+    public final static byte SET_DIFFICULTY_PACKET = (byte) 0x35;
+    public final static byte CHANGE_DIMENSION_PACKET = (byte) 0x36;
+    public final static byte SET_PLAYER_GAMETYPE_PACKET = (byte) 0x37;
+    public final static byte PLAYER_LIST_PACKET = (byte) 0x38;
     //public final static byte TELEMETRY_EVENT_PACKET = (byte) 0xc4;
     //public final static byte SPAWN_EXPERIENCE_ORB_PACKET = (byte) 0xc5
-    public final static byte CLIENTBOUND_MAP_ITEM_DATA_PACKET = (byte) 0xc6;
-    public final static byte REPLACE_SELECTED_ITEM_PACKET = (byte) 0xcb;
+    public final static byte CLIENTBOUND_MAP_ITEM_DATA_PACKET = (byte) 0x3b;
+	public final static byte CHUNK_RADIUS_UPDATED_PACKET = (byte) 0x3e;
+    public final static byte REPLACE_SELECTED_ITEM_PACKET = (byte) 0x40;
 }
