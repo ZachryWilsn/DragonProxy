@@ -11,6 +11,8 @@ It works like BungeeCord but much more powerful than that. ;)
 
 You can switch between servers even between PE and PC servers by using command `/server blah`, you can change the default prefix `/` if it conflicts with BungeeCord one. 
 
+Video by @MrPowerGamerBR (On an older version): https://www.youtube.com/watch?v=oRSKQMzZYDE
+
 ![Screenshot](https://raw.githubusercontent.com/DragonetMC/DragonProxy/master/screenshots/TheArchon.png)
 
 ## Installation
