@@ -23,14 +23,13 @@ import org.dragonet.proxy.utilities.io.PEBinaryWriter;
 public class LoginPacket extends PEPacket {
 
     public String username;
-    public int protocol1;
-    public int protocol2;
+    public int protocol;
     public long clientID;
-    public UUID clientUuid;
+    public UUID clientUUID;
     public String serverAddress;
-    public String clientSecret;
+    public String clientSecret; //identityPublicKey?
 
-    public String skinName;
+    public String skinId;
     public byte[] skin;
 
     public LoginPacket(byte[] data) {
@@ -77,19 +76,14 @@ public class LoginPacket extends PEPacket {
     public void decode() {
         try {
             PEBinaryReader reader = new PEBinaryReader(new ByteArrayInputStream(this.getData()));
-            reader.readByte(); //PID
-            this.username = reader.readString();
-            this.protocol1 = reader.readInt();
-            this.protocol2 = reader.readInt();
-            this.clientID = reader.readLong();
-            this.clientUuid = reader.readUUID();
-            this.serverAddress = reader.readString();
-            this.clientSecret = reader.readString();
-
-            this.skinName = reader.readString();
-            int len = reader.readShort();
-            this.skin = reader.read(len);
-            this.setLength(reader.totallyRead());
+            reader.readByte(); //PID I think this is still needed here?
+            this.protocol = reader.readInt();
+            byte[] str = Zlib.inflate(this.get(this.getInt()), 1024 * 1024 * 64);
+            this.setBuffer(str, 0);
+            //ByTheWay: How can you decode json in java at all?
+            //todo::JsonDecoding [Chain]
+            //todo::skinToken [Json]
+            this.setLength(reader.totallyRead()); //I think this is still needed here?
         } catch (IOException e) {
         }
     }
